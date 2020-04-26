@@ -1,0 +1,36 @@
+.items-list{
+    list-style: none;
+    padding: 0;
+    margin: 0 0 5% 0;
+}
+
+.list-item{
+    width: 95%;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+}
+
+.list-item-conteiner{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.list-item-conteiner h3{
+    text-align: center;
+}
+
+.my-node-enter {
+    opacity: 0;
+}
+.my-node-enter-active {
+    opacity: 1;
+    transition: opacity 200ms;
+}
+.my-node-exit {
+    opacity: 1;
+}
+.my-node-exit-active {
+    opacity: 0;
+    transition: opacity 200ms;
+}
