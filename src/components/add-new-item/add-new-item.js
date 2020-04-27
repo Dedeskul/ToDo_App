@@ -30,7 +30,7 @@ class AddNewItem extends Component {
                 <form className="form-group" onSubmit={onSubmit}>
                     <input type="text"
                            className="form-control"
-                           placeholder="your task here"
+                           placeholder="Enter your task and press Enter"
                            value={this.state.text}
                            onChange={onChange}
                     />

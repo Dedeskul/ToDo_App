@@ -1,4 +1,12 @@
-import {ADD_NEW_TASK, DELETE_TASK, MARK_AS_DONE, MARK_AS_IMPORTANT} from "../actions/actions-description";
+import {
+    ADD_NEW_TASK,
+    DELETE_TASK,
+    MARK_AS_DONE,
+    MARK_AS_IMPORTANT,
+    SHOW_ALL_DONE_TASKS,
+    SHOW_ALL_IMPORTANT_TASKS,
+    SHOW_ALL_TASKS
+} from "../actions/actions-description";
 
 const tasks = [
     {
@@ -26,7 +34,7 @@ const toDoListReducer = (state = tasks, action) => {
 
     switch (action.type) {
         case ADD_NEW_TASK:
-            if (action.payload.text === ""){
+            if (action.payload.text === "") {
                 return state
             }
             return [...state, action.payload];
@@ -40,6 +48,12 @@ const toDoListReducer = (state = tasks, action) => {
                     ? {...task, important: !task.important} : task);
         case DELETE_TASK:
             return state.slice(0, action.payload).concat(state.slice(action.payload + 1));
+        case SHOW_ALL_IMPORTANT_TASKS:
+            return state.filter(task => task.important === action.payload)
+        case SHOW_ALL_DONE_TASKS:
+            return state.filter(task => task.done === action.payload)
+        case SHOW_ALL_TASKS:
+            console.log(state)
         default:
             return state;
     }

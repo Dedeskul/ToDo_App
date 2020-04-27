@@ -1,19 +1,40 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './header.css';
 import {CSSTransition} from "react-transition-group";
 import {Container, Alert} from 'react-bootstrap';
-import {markAsImportant} from "../store/actions/actions";
+import {markAsImportant, showAllDoneTasks, showAllImportantTasks, showAllTasks} from "../store/actions/actions";
 import {connect} from 'react-redux';
 
 
-const Header = () => {
+const Header = ({showAllImportantTasks, showAllDoneTasks, showAllTasks}) => {
+
+    useEffect(() => {
+        async function getApi() {
+            const data = await fetch("https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=e96b591966cf091ea313818cceb1c5fa");
+            const getData = await data.json();
+            console.log(getData);
+        }
+        setTimeout(()=>{
+            console.log("function where started");
+        }, 2000);
+
+    })
 
     const [showButton, setShowButton] = useState(true);
     const [showMessage, setShowMessage] = useState(false);
 
     const showImportantTasks = () => {
-        this.props.markAsImportant(true)
+        showAllImportantTasks(true)
     };
+
+    const showDoneTasks = () => {
+        showAllDoneTasks(true)
+    }
+
+    const AllTasks = () => {
+        showAllTasks();
+    }
+
 
     return (
         <div className="header">
@@ -53,10 +74,16 @@ const Header = () => {
                                     </button>
                                 </li>
                                 <li>
-                                    <button className="btn btn-sm btn-success">Done</button>
+                                    <button className="btn btn-sm btn-success"
+                                            onClick={showDoneTasks}
+                                    >Done
+                                    </button>
                                 </li>
                                 <li>
-                                    <button className="btn btn-sm btn-dark">Smth</button>
+                                    <button className="btn btn-sm btn-dark"
+                                            onClick={AllTasks}
+                                    >All
+                                    </button>
                                 </li>
                             </ul>
                         </Alert>
@@ -67,8 +94,16 @@ const Header = () => {
     )
 }
 
+const mapStateToProps = ({tasks}) => {
+    return {
+        tasks
+    }
+}
+
 const mapDispatchToProps = dispatch => ({
-    markAsImportant: index => dispatch(markAsImportant(index)),
+    showAllImportantTasks: important => dispatch(showAllImportantTasks(important)),
+    showAllDoneTasks: done => dispatch(showAllDoneTasks(done)),
+    showAllTasks: () => dispatch(showAllTasks())
 })
 
-export default connect(undefined, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

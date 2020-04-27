@@ -9,12 +9,11 @@
 }
 
 .buttonsGroup {
-    margin-right: 20px;
-}
-
-.buttonsGroup a{
-    margin-left: 10%;
-    margin-right: 10%;
+    width: 9%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 1%;
 }
 
 .buttonsGroup a:hover{
@@ -30,5 +29,37 @@
 }
 
 .done {
-    background: lightblue;
+    text-decoration: line-through;
+}
+
+.item-info{
+    width: 90%;
+}
+
+input[type="checkbox"]{
+    display: none;
+}
+
+label::before{
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url('https://image.flaticon.com/icons/svg/17/17153.svg');
+    background-size: 100%;
+    vertical-align: middle;
+    margin-right: 10px;
+    transition: 0.3s;
+
+}
+
+input[type="checkbox"]:checked + label::before{
+    border: none;
+    border-radius: 50%;
+    background: url("https://image.flaticon.com/icons/svg/1617/1617543.svg");
+    background-size: 100%;
+}
+
+label::after{
+
 }

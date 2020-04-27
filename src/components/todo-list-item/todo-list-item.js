@@ -3,43 +3,36 @@ import './todo-list-item.css';
 import {DeleteTask, markAsDone, markAsImportant} from '../store/actions/actions';
 import {connect} from 'react-redux'
 
-class ToDoListItem extends Component {
 
+const ToDoListItem = ({task, index, DeleteTask, markAsImportant, markAsDone}) => {
 
-    render() {
-
-        const {task, index} = this.props;
-
-        const deleteOnKlick = () => {
-            this.props.DeleteTask(index)
-            console.log(index)
-        }
-
-        const marcAsImportant = () => {
-            this.props.markAsImportant(task.id);
-        }
-
-        const markAsDone = () => {
-            this.props.markAsDone(task.id);
-        }
-
-        return (
-            <div className={`item ${task.important ? 'important' : ''} ${task.done? 'done': ''}`}>
-                {task.text}
-                <div className="buttonsGroup">
-                    <a onClick={markAsDone}>
-                        ✔
-                    </a>
-                    <a onClick={marcAsImportant}>
-                        ❕
-                    </a>
-                    <a onClick={deleteOnKlick}>
-                        ❌
-                    </a>
-                </div>
-            </div>
-        )
+    const deleteOnKlick = () => {
+        DeleteTask(index)
     }
+
+    const marcTaskAsImportant = () => {
+        console.log(task.id)
+        markAsImportant(task.id);
+    }
+
+    const markTaskAsDone = () => {
+        markAsDone(task.id);
+    }
+
+    return (
+        <div className={`item ${task.important ? 'important' : ''}`}>
+            <div className="item-info">
+                <input type="checkbox" checked={`${task.done ? 'checked' : ''}`}/>
+                <label className={`${task.done ? 'done' : ''}`}>{task.text}</label>
+            </div>
+
+            <div className="buttonsGroup">
+                <a onClick={markTaskAsDone}> ✔ </a>
+                <a onClick={marcTaskAsImportant} title="Mark as important"> ❕ </a>
+                <a onClick={deleteOnKlick} title="Delete task"> ❌ </a>
+            </div>
+        </div>
+    )
 }
 
 const mapStateToProps = ({tasks}) => {
@@ -53,6 +46,5 @@ const mapDispatchToProps = dispatch => ({
     markAsImportant: index => dispatch(markAsImportant(index)),
     markAsDone: index => dispatch(markAsDone(index))
 })
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToDoListItem);
