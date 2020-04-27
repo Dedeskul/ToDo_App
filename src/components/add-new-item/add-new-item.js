@@ -1,28 +1,20 @@
-import React, {Component} from "react";
+import React, {useState} from "react";
 import {connect} from 'react-redux';
 import {TodoListActions} from "../store/actions/actions";
 import './add-new-item.css';
 
-class AddNewItem extends Component {
+const AddNewItem = ({TodoListActions}) => {
 
-    state = {
-        text: ''
-    }
-
-    render() {
+    const [text, setText] = useState('');
 
         const onChange = (e) => {
-            this.setState({
-                text: e.target.value
-            })
+            setText(e.target.value)
         }
 
         const onSubmit = (e) => {
             e.preventDefault();
-            this.props.TodoListActions(this.state.text);
-            this.setState({
-                text: ''
-            })
+            TodoListActions(text);
+            setText('');
         }
 
         return (
@@ -31,13 +23,12 @@ class AddNewItem extends Component {
                     <input type="text"
                            className="form-control"
                            placeholder="Enter your task and press Enter"
-                           value={this.state.text}
+                           value={text}
                            onChange={onChange}
                     />
                 </form>
             </div>
         )
-    }
 }
 
 const mapStateToProps = ({tasks}) => {
