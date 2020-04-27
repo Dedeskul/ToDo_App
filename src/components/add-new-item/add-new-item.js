@@ -1,34 +1,39 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {connect} from 'react-redux';
 import {TodoListActions} from "../store/actions/actions";
 import './add-new-item.css';
 
-const AddNewItem = ({TodoListActions}) => {
+const AddNewItem = ({tasks, TodoListActions}) => {
 
     const [text, setText] = useState('');
+    const [state, setState] = useState(tasks);
 
-        const onChange = (e) => {
-            setText(e.target.value)
-        }
+    useEffect(()=>{
+        setState(tasks)
+    })
 
-        const onSubmit = (e) => {
-            e.preventDefault();
-            TodoListActions(text);
-            setText('');
-        }
+    const onChange = (e) => {
+        setText(e.target.value)
+    }
 
-        return (
-            <div className="newItemInput">
-                <form className="form-group" onSubmit={onSubmit}>
-                    <input type="text"
-                           className="form-control"
-                           placeholder="Enter your task and press Enter"
-                           value={text}
-                           onChange={onChange}
-                    />
-                </form>
-            </div>
-        )
+    const onSubmit = (e) => {
+        e.preventDefault();
+        TodoListActions(text);
+        setText('');
+    }
+
+    return (
+        <div className="newItemInput">
+            <form className="form-group" onSubmit={onSubmit}>
+                <input type="text"
+                       className="form-control"
+                       placeholder="Enter your task and press Enter"
+                       value={text}
+                       onChange={onChange}
+                />
+            </form>
+        </div>
+    )
 }
 
 const mapStateToProps = ({tasks}) => {

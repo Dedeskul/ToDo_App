@@ -48,12 +48,6 @@ const toDoListReducer = (state = tasks, action) => {
                     ? {...task, important: !task.important} : task);
         case DELETE_TASK:
             return state.slice(0, action.payload).concat(state.slice(action.payload + 1));
-        case SHOW_ALL_IMPORTANT_TASKS:
-            return state.filter(task => task.important === action.payload)
-        case SHOW_ALL_DONE_TASKS:
-            return state.filter(task => task.done === action.payload)
-        case SHOW_ALL_TASKS:
-            console.log(state)
         default:
             return state;
     }

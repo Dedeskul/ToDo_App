@@ -4,6 +4,7 @@ import {CSSTransition, TransitionGroup} from "react-transition-group";
 import {connect} from 'react-redux';
 import ToDoListItem from "../todo-list-item/todo-list-item";
 import {TodoListActions} from "../store/actions/actions";
+import {selectFilteredTasks} from '../store/selectors'
 
 const ToDoList = ({tasks}) => {
     return (
@@ -30,9 +31,10 @@ const ToDoList = ({tasks}) => {
     )
 }
 
-const mapStateToProps = ({tasks}) => {
+const mapStateToProps = (state) => {
+    console.log(state)
     return {
-        tasks
+        tasks: selectFilteredTasks(state)
     }
 }
 

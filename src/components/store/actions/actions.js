@@ -41,17 +41,15 @@ const markAsDone = (id) => {
     }
 };
 
-const showAllImportantTasks = (important) => {
+const showAllImportantTasks = () => {
     return {
-        type: SHOW_ALL_IMPORTANT_TASKS,
-        payload: important
+        type: SHOW_ALL_IMPORTANT_TASKS
     }
 }
 
-const showAllDoneTasks = (done) => {
+const showAllDoneTasks = () => {
     return {
-        type: SHOW_ALL_DONE_TASKS,
-        payload: done
+        type: SHOW_ALL_DONE_TASKS
     }
 }
 
